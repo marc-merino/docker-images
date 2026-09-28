@@ -171,7 +171,6 @@ COPY --chown=${STACKABLE_USER_UID}:0 --from=hadoop-builder /stackable/*-src.tar.
 COPY --chown=${STACKABLE_USER_UID}:0 --from=hive-builder /stackable/jmx /stackable/jmx
 COPY --chown=${STACKABLE_USER_UID}:0 --from=hive-metastore-opa-authorizer-builder /stackable/opa-authorizer-bin /stackable/apache-hive-metastore-${PRODUCT_VERSION}-stackable${RELEASE_VERSION}-bin/lib
 COPY --chown=${STACKABLE_USER_UID}:0 --from=hive-metastore-opa-authorizer-builder /stackable/opa-authorizer-src /stackable
-COPY --chown=${STACKABLE_USER_UID}:0 hive/stackable/jmx /stackable/jmx
 COPY --chown=${STACKABLE_USER_UID}:0 hive/stackable/bin/start-metastore /stackable/apache-hive-metastore-${PRODUCT_VERSION}-stackable${RELEASE_VERSION}-bin/bin
 
 COPY hive/licenses /licenses

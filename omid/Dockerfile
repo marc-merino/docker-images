@@ -78,6 +78,7 @@ rm -rf /var/cache/yum
 
 ln -s /stackable/omid-tso-server-${PRODUCT_VERSION}-stackable${RELEASE_VERSION} /stackable/omid-tso-server
 ln -s /stackable/omid-examples-${PRODUCT_VERSION}-stackable${RELEASE_VERSION} /stackable/omid-examples
+mkdir -p /stackable/jmx
 curl https://repo.stackable.tech/repository/packages/jmx-exporter/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar \
 -o /stackable/jmx/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar
 chmod -x /stackable/jmx/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar

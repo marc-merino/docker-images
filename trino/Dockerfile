@@ -43,10 +43,9 @@ COPY --from=trino-storage-connector-image --chown=${STACKABLE_USER_UID}:0 /stack
 COPY --from=trino-storage-connector-image --chown=${STACKABLE_USER_UID}:0 /stackable/src/trino-storage-connector/patchable-work/worktree/${TRINO_STORAGE_CONNECTOR_VERSION}/target/bom.json /stackable/trino-server-${PRODUCT_VERSION}-stackable${RELEASE_VERSION}/plugin/trino-storage-${TRINO_STORAGE_CONNECTOR_VERSION}-stackable${RELEASE_VERSION}/trino-storage-${TRINO_STORAGE_CONNECTOR_VERSION}-stackable${RELEASE_VERSION}.cdx.json
 COPY --from=trino-storage-connector-image --chown=${STACKABLE_USER_UID}:0 /stackable/trino-storage-connector-${TRINO_STORAGE_CONNECTOR_VERSION}-stackable${RELEASE_VERSION}-src.tar.gz /stackable
 
-COPY --chown=${STACKABLE_USER_UID}:0 trino/stackable/jmx /stackable/jmx
-
 RUN <<EOF
 # JMX Exporter
+mkdir -p /stackable/jmx
 curl https://repo.stackable.tech/repository/packages/jmx-exporter/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar -o /stackable/jmx/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar
 chmod +x /stackable/jmx/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar
 ln -s /stackable/jmx/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar /stackable/jmx/jmx_prometheus_javaagent.jar

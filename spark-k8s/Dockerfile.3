@@ -160,8 +160,6 @@ COPY --from=hbase-builder --chown=${STACKABLE_USER_UID}:0 \
     /stackable/hbase/lib/client-facing-thirdparty/opentelemetry-semconv-*-alpha.jar \
     ./
 
-COPY spark-k8s/stackable/jmx /stackable/jmx
-
 WORKDIR /stackable/spark-${PRODUCT_VERSION}-stackable${RELEASE_VERSION}/dist/extra-jars
 
 RUN <<EOF
@@ -184,6 +182,7 @@ curl --fail "https://repo.stackable.tech/repository/packages/tini/tini-${TINI_VE
 chmod +x /usr/bin/tini
 
 # JMX Exporter
+mkdir -p /stackable/jmx
 curl --fail "https://repo.stackable.tech/repository/packages/jmx-exporter/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar" \
   -o "/stackable/jmx/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar"
 ln -s "/stackable/jmx/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar" /stackable/jmx/jmx_prometheus_javaagent.jar

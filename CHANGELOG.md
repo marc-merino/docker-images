@@ -24,9 +24,10 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- kafka, hadoop, zookeeper: Remove bundled JMX exporter YAML configurations; the exporter JAR remains in the images.
-  These images require matching Kafka, HDFS and ZooKeeper operators that supply JMX configurations through ConfigMaps.
-  Migrate the operators before rolling out these images ([stackabletech/issues#160](https://github.com/stackabletech/issues/issues/160)).
+- kafka, hadoop, zookeeper, hive, trino, spark-k8s (Spark 3 and 4): Remove bundled JMX exporter YAML configurations; the exporter JAR remains in the images.
+  These images require matching Kafka, HDFS, ZooKeeper, Hive, Trino and Spark operators that supply JMX configurations through ConfigMaps.
+  Ship these image changes with the matching operator configurations ([stackabletech/issues#160](https://github.com/stackabletech/issues/issues/160)).
+- omid: Remove the unused `tso.yaml` JMX configuration; retain the exporter JAR.
 - opensearch-dashboards: Bump cdxgen to 13.2.0 and pin the CycloneDX spec version to 1.6 ([#1600], [#1675]).
 - opa, statsd-exporter: Bump cyclonedx-gomod to 1.12.0 ([#1639]).
 - superset: change statsd-exporter to `0.31.0` ([#1673]).
