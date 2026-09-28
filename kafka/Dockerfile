@@ -15,7 +15,6 @@ ARG STACKABLE_USER_UID
 USER ${STACKABLE_USER_UID}
 WORKDIR /stackable
 
-COPY --chown=${STACKABLE_USER_UID}:0 kafka/stackable/jmx/ /stackable/jmx/
 COPY --chown=${STACKABLE_USER_UID}:0 kafka/stackable/patches/patchable.toml /stackable/src/kafka/stackable/patches/patchable.toml
 COPY --chown=${STACKABLE_USER_UID}:0 kafka/stackable/patches/${PRODUCT_VERSION} /stackable/src/kafka/stackable/patches/${PRODUCT_VERSION}
 COPY --chown=${STACKABLE_USER_UID}:0 --from=patched-reload4j /stackable/.m2/repository /stackable/patched-reload4j-libs
@@ -51,6 +50,7 @@ rm -rf /stackable/kafka_${SCALA_VERSION}-${NEW_VERSION}/site-docs/
 (cd .. && rm -rf ${PRODUCT_VERSION})
 
 # JMX exporter
+mkdir -p /stackable/jmx
 curl https://repo.stackable.tech/repository/packages/jmx-exporter/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar \
   -o /stackable/jmx/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar
 chmod +x /stackable/jmx/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar

@@ -94,7 +94,6 @@ COPY --chown=${STACKABLE_USER_UID}:0 --from=hadoop-builder /stackable/*-src.tar.
 COPY --chown=${STACKABLE_USER_UID}:0 --from=hdfs-utils-builder /stackable/hdfs-utils-${HDFS_UTILS_VERSION}.jar /stackable/hadoop-${HADOOP_VERSION}-stackable${RELEASE_VERSION}/share/hadoop/common/lib/hdfs-utils-${HDFS_UTILS_VERSION}.jar
 COPY --chown=${STACKABLE_USER_UID}:0 --from=hdfs-utils-builder /stackable/hdfs-utils-${HDFS_UTILS_VERSION}-src.tar.gz /stackable
 
-COPY --chown=${STACKABLE_USER_UID}:0 hadoop/stackable/jmx /stackable/jmx
 COPY --chown=${STACKABLE_USER_UID}:0 hadoop/licenses /licenses
 
 # fuse is required for fusermount (called by fuse_dfs)
@@ -128,6 +127,7 @@ curl "https://repo.stackable.tech/repository/packages/async-profiler/async-profi
 ln -s "/stackable/async-profiler-${ASYNC_PROFILER_VERSION}-${TARGETOS}-${ARCH}" /stackable/async-profiler
 
 # JMX Exporter
+mkdir -p /stackable/jmx
 curl "https://repo.stackable.tech/repository/packages/jmx-exporter/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar" -o "/stackable/jmx/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar"
 chmod -x "/stackable/jmx/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar"
 ln -s "/stackable/jmx/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar" /stackable/jmx/jmx_prometheus_javaagent.jar

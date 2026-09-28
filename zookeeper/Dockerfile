@@ -16,8 +16,6 @@ ARG RELEASE_VERSION
 # Copy patches into the builder
 COPY --chown=${STACKABLE_USER_UID}:0 zookeeper/stackable/patches/patchable.toml /stackable/src/zookeeper/stackable/patches/patchable.toml
 COPY --chown=${STACKABLE_USER_UID}:0 zookeeper/stackable/patches/${PRODUCT_VERSION} /stackable/src/zookeeper/stackable/patches/${PRODUCT_VERSION}
-# Copy JMX config into the builder
-COPY --chown=${STACKABLE_USER_UID}:0 zookeeper/stackable/jmx /stackable/jmx
 COPY --chown=${STACKABLE_USER_UID}:0 --from=patched-logback /stackable/.m2/repository /stackable/patched-logback-libs
 
 USER ${STACKABLE_USER_UID}
@@ -56,6 +54,7 @@ rm -rf /stackable/apache-zookeeper-${NEW_VERSION}-bin/docs
 rm /stackable/apache-zookeeper-${NEW_VERSION}-bin/README_packaging.md
 
 # Download the JMX exporter jar from our own repo
+mkdir -p /stackable/jmx
 curl "https://repo.stackable.tech/repository/packages/jmx-exporter/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar" \
   -o "/stackable/jmx/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar"
 chmod +x "/stackable/jmx/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar"
